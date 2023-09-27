@@ -1,4 +1,4 @@
-﻿namespace Lecture_No17_HW
+﻿namespace Lecture_No17_HW_Core
 {
     public static class Extensions
     {
