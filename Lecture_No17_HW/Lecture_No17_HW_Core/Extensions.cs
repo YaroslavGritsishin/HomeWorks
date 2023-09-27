@@ -1,4 +1,6 @@
-﻿namespace Lecture_No17_HW_Core
+﻿using System.Runtime.CompilerServices;
+
+namespace Lecture_No17_HW_Core
 {
     public static class Extensions
     {
@@ -9,5 +11,16 @@
                 result[getParameter(item)] = item;
             return result[result.Keys.Max()];
         }
+        public static PathFinder Subscribe(this PathFinder pathFinder, PathFinder.EventHandler handler) 
+        {
+            pathFinder.FileFound += handler;
+            return pathFinder;
+        }
+        public static PathFinder Unsubscribe(this PathFinder pathFinder, PathFinder.EventHandler handler) 
+        {
+            pathFinder.FileFound -= handler;
+            return pathFinder;
+        }
     }
 }
+
