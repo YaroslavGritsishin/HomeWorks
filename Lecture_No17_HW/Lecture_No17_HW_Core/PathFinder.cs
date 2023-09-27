@@ -7,11 +7,14 @@ namespace Lecture_No17_HW_Core
         public delegate void EventHandler(FileArgs args);
         public event EventHandler FileFound;
 
-        public void Execute(string directoryName)
+        public void Execute(string directoryName, CancellationToken token)
         {
             Directory.GetFiles(directoryName)
                 .ToList()
-                .ForEach(filePath => FileFound?.Invoke(new FileArgs() { FileName = $"Found file: {Path.GetFileName(filePath)}"}));
+                .ForEach(filePath => {
+                    if(!token.IsCancellationRequested)
+                        FileFound?.Invoke(new FileArgs() { FileName = $"Found file: {Path.GetFileName(filePath)}" });
+                });
         }
 
         public void Dispose()
