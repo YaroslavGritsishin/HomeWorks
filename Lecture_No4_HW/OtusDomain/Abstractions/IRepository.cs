@@ -2,7 +2,7 @@
 
 namespace OtusDomain.Abstractions
 {
-    public interface IRepository<TEntity, TKey> where TKey: struct where TEntity : IEntityBase<TKey> 
+    public interface IRepository<TEntity> where TEntity : class
     {
         Task CreateAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
