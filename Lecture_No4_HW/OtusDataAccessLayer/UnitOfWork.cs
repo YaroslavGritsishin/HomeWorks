@@ -14,7 +14,7 @@ namespace OtusDataAccessLayer
         {
             this.context = context;
         }
-        public IStudentRepository StudentRepository => studentRepository?? new StudentRepository(context);
+        public IStudentRepository StudentRepository => studentRepository ?? new StudentRepository(context);
         public ICourseRepository CourseRepository => courseRepository ?? new CourseRepository(context);
 
         public async Task SaveChangesAsync()
