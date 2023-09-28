@@ -1,4 +1,5 @@
 ﻿using Lecture_No4_HW.ViewModels;
+using System.Linq.Expressions;
 
 namespace OtusServices.Abstractions
 {
@@ -7,7 +8,7 @@ namespace OtusServices.Abstractions
         Task CreateCourseAsync(CourseViewModel course);
         Task DeleteCourseAsync(CourseViewModel course);
         Task<IEnumerable<CourseViewModel>> GetAllCoursesAsync();
-        Task<CourseViewModel> FindCourse(Action<CourseViewModel> action);
+        Task<CourseViewModel> FindCourse(int id);
         Task UpdateCourse(CourseViewModel course);
     }
 }
