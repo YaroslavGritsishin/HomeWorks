@@ -1,7 +1,9 @@
 ﻿
+using OtusDomain.Abstractions;
+
 namespace OtusDomain.Entities
 {
-    public class CourseEntity
+    public class CourseEntity: EntityBase
     {
         public CourseEntity() => Students = new List<StudentEntity>();
         public string CourseName { get; set; }
