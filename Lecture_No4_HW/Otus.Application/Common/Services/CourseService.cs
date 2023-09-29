@@ -1,9 +1,9 @@
-﻿using OtusDataAccessLayer.Abstractions;
-using OtusServices.Abstractions;
-using OtusViewModels;
-using OtusDataTransferObject;
+﻿using Otus.Application.Common.Interfaces.Persistents;
+using Otus.Application.Common.Interfaces.Services;
+using Otus.Application.Mappers;
+using Otus.Application.ApplicationModels;
 
-namespace OtusServices
+namespace Otus.Application.Common.Services
 {
     public class CourseService : ICourseService
     {
@@ -12,28 +12,28 @@ namespace OtusServices
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task CreateCourseAsync(CourseViewModel course) 
+        public async Task CreateCourseAsync(CourseApplicationModel course)
         {
             await unitOfWork.CourseRepository.CreateAsync(course.ToEntity());
             await unitOfWork.SaveChangesAsync();
         }
-        public async Task DeleteCourseAsync(CourseViewModel course)
+        public async Task DeleteCourseAsync(CourseApplicationModel course)
         {
             await unitOfWork.CourseRepository.RemoveAsync(course.ToEntity());
             await unitOfWork.SaveChangesAsync();
         }
-        public async Task<CourseViewModel> FindCourse(int id)
+        public async Task<CourseApplicationModel> FindCourse(int id)
         {
             var foundCourse = await unitOfWork.CourseRepository.FindAsync(course => course.Id == id);
-            return foundCourse.ToViewModel();
+            return foundCourse.ToAppModel();
         }
 
-        public async Task<IEnumerable<CourseViewModel>> GetAllCoursesAsync() 
+        public async Task<IEnumerable<CourseApplicationModel>> GetAllCoursesAsync()
         {
-            var result =  await unitOfWork.CourseRepository.GetAllAsync();
-            return result.ToViewModel();
+            var result = await unitOfWork.CourseRepository.GetAllAsync();
+            return result.ToAppModel();
         }
-        public async Task UpdateCourse(CourseViewModel course)
+        public async Task UpdateCourse(CourseApplicationModel course)
         {
             await unitOfWork.CourseRepository.UpdateAsync(course.ToEntity());
             await unitOfWork.SaveChangesAsync();

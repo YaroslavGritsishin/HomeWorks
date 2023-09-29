@@ -1,7 +1,7 @@
-﻿using Lecture_No4_HW.ViewModels;
-using OtusDataAccessLayer.Abstractions;
-using OtusDataTransferObject;
+﻿using OtusDataAccessLayer.Abstractions;
 using OtusServices.Abstractions;
+using OtusViewModels;
+using OtusDataTransferObject;
 
 namespace OtusServices
 {

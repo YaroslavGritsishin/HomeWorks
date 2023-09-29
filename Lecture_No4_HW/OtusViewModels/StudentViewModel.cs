@@ -1,4 +1,4 @@
-﻿namespace Lecture_No4_HW.ViewModels
+﻿namespace OtusViewModels
 {
     public class StudentViewModel
     {

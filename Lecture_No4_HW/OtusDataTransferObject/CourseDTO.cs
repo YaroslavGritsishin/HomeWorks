@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Lecture_No4_HW.ViewModels;
 using OtusDomain.Entities;
+using OtusViewModels;
 
 namespace OtusDataTransferObject
 {
