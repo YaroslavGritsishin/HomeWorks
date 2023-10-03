@@ -21,7 +21,11 @@ var host = Host.CreateDefaultBuilder(args)
 
 var studentService = host.Services.GetRequiredService<IStudentService>();
 var courseService = host.Services.GetRequiredService<ICourseService>();
-CommandHandler commandHandler = new(studentService,courseService);
+CommandHandler commandHandler = new(studentService, courseService);
+new DataBaseInitializer(studentService, courseService).SeedData();
+Console.Clear();
+
+
 
 while (true) 
 {
