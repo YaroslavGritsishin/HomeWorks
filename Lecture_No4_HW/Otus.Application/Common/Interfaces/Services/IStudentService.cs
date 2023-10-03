@@ -7,7 +7,7 @@ namespace Otus.Application.Common.Interfaces.Services
         Task CreateStudentAsync(StudentApplicationModel student);
         Task DeleteStudentAsync(StudentApplicationModel student);
         Task<StudentApplicationModel> FindStudent(int id);
-        Task<IEnumerable<StudentApplicationModel>> GetAllCoursesAsync();
+        Task<IEnumerable<StudentApplicationModel>> GetAllStudentAsync();
         Task UpdateStudent(StudentApplicationModel student);
     }
 }

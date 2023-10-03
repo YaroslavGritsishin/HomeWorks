@@ -22,7 +22,7 @@ public static class CourseAppModelDTO
     });
     public static MapperConfiguration ToAppModelMap() => new(cfg =>
     {
-        cfg.CreateMap<CourseApplicationModel, CourseEntity>()
+        cfg.CreateMap<CourseEntity, CourseApplicationModel>()
             .ForMember(src => src.CourseName, opt => opt.MapFrom(target => target.CourseName))
             .ForMember(src => src.Students, opt => opt.MapFrom(target => target.Students))
             .ForMember(src => src.Id, opt => opt.MapFrom(target => target.Id));

@@ -30,7 +30,7 @@ namespace Otus.Application.Common.Services
             return foundStudent.ToAppModel();
         }
 
-        public async Task<IEnumerable<StudentApplicationModel>> GetAllCoursesAsync()
+        public async Task<IEnumerable<StudentApplicationModel>> GetAllStudentAsync()
         {
             var result = await unitOfWork.StudentRepository.GetAllAsync();
             return result.ToAppModel();

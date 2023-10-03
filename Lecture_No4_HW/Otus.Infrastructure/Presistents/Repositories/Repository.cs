@@ -2,7 +2,7 @@
 using OtusDomain.Abstractions;
 using System.Linq.Expressions;
 
-namespace Otus.Infrastructure.Presistents.Repositories
+namespace Otus.Infrastructure.Presistents
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntityBase<int>
     {

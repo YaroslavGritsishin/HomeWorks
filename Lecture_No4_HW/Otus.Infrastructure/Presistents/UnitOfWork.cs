@@ -8,9 +8,9 @@ namespace Otus.Infrastructure.Presistents
     {
         private readonly IStudentRepository studentRepository;
         private readonly ICourseRepository courseRepository;
-        private readonly DbContext context;
+        private readonly OtusDbContext context;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(OtusDbContext context)
         {
             this.context = context;
         }
