@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using OtusDomain.Abstractions;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Otus.Infrastructure.Presistents
 {
@@ -9,8 +13,12 @@ namespace Otus.Infrastructure.Presistents
         private readonly DbContext context;
         public Repository(DbContext context) => this.context = context;
 
-        public virtual async Task CreateAsync(TEntity entity)
-                => await context.Set<TEntity>().AddAsync(entity);
+        public virtual async Task<TEntity> CreateAsync(TEntity entity) 
+        {
+           var createdEntity = await context.Set<TEntity>().AddAsync(entity);
+           return createdEntity.Entity;
+        }
+                 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
                 => await context.Set<TEntity>().AsNoTracking().ToListAsync();
         public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
@@ -29,6 +37,10 @@ namespace Otus.Infrastructure.Presistents
             {
                 context.Entry(foundEntity).CurrentValues.SetValues(entity);
             }
+        }
+        public virtual async Task<int> ExecuteSqlRawAsync(string sql, IEnumerable<object> parameters)
+        {
+            return await context.Database.ExecuteSqlRawAsync(sql,parameters);
         }
         private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
         {

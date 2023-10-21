@@ -2,6 +2,7 @@
 using Otus.Application.Common.Interfaces.Services;
 using Otus.Application.Mappers;
 using Otus.Application.ApplicationModels;
+using Npgsql;
 
 namespace Otus.Application.Common.Services
 {
@@ -14,8 +15,13 @@ namespace Otus.Application.Common.Services
         }
         public async Task CreateCourseAsync(CourseApplicationModel course)
         {
-            await unitOfWork.CourseRepository.CreateAsync(course.ToEntity());
-            await unitOfWork.SaveChangesAsync();
+            var courseEntity = course.ToEntity();
+            IEnumerable<NpgsqlParameter> parameters = new List<NpgsqlParameter>()
+            {
+                new NpgsqlParameter("@p0",courseEntity.CourseName)
+            };
+            string query = $"INSERT INTO \"Courses\" (\"CourseName\") VALUES (@p0)";
+            await unitOfWork.StudentRepository.ExecuteSqlRawAsync(query, parameters);
         }
         public async Task DeleteCourseAsync(CourseApplicationModel course)
         {
