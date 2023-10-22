@@ -14,17 +14,19 @@ namespace WebApi.Controllers
         private readonly IGetCustomerByIdUseCase getCustomerByIdUseCase;
         private readonly IRemoveCustomerUseCase removeCustomerUseCase;
         private readonly IUpdateCustomerUseCase updateCustomerUseCase;
+        private readonly IGetCustomersUseCase getCustomersUseCase;
 
         public CustomerController(IAddCustomerUseCase addCustomerUseCase, 
             IGetCustomerByIdUseCase getCustomerByIdUseCase,
             IRemoveCustomerUseCase removeCustomerUseCase,
             IUpdateCustomerUseCase updateCustomerUseCase,
-            IGet)
+            IGetCustomersUseCase getCustomersUseCase)
         {
             this.addCustomerUseCase = addCustomerUseCase;
             this.getCustomerByIdUseCase = getCustomerByIdUseCase;
             this.removeCustomerUseCase = removeCustomerUseCase;
             this.updateCustomerUseCase = updateCustomerUseCase;
+            this.getCustomersUseCase = getCustomersUseCase;
         }
 
         [HttpGet("{id}")]   
@@ -42,12 +44,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                return Ok(await getCustomerByIdUseCase.EcxecuteAsync(id));
+                return Ok(await getCustomersUseCase.EcxecuteAsync());
             }
             catch (CustomerNotFoundExeption ex) { return NotFound(ex.Message); }
             catch (Exception) { return Problem(statusCode: 500, detail: "¬нутренн€€ ошибка сервера!"); }
         }
-
+        
         [HttpPost]   
         public async Task<IActionResult> CreateCustomerAsync([FromBody] CustomerViewModel customer)
         {
