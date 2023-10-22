@@ -2,7 +2,7 @@
 
 namespace WebClient.Models.RandomUsersApi
 {
-    public class RundomUserResponse
+    public class ResponseOfRundomUserApi
     {
         public Result[] results { get; set; }
         public Info info { get; set; }
