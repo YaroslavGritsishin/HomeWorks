@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lecture_No4_HW", "Lecture_No4_HW\Lecture_No4_HW.csproj", "{003EE6A8-3983-4D14-A10A-F807116A8993}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtusDomain", "OtusDomain\OtusDomain.csproj", "{E18ACE2F-4CE9-4FDE-B433-6C8443E9BABC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Infrastructure", "Otus.Infrastructure\Otus.Infrastructure.csproj", "{44FC8390-316A-4027-AF46-816E7D440F9B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6195C942-D53E-4B6A-A468-6D172DCED45F} = {6195C942-D53E-4B6A-A468-6D172DCED45F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Contracts", "Otus.Contracts\Otus.Contracts.csproj", "{646EAF1E-C74C-4180-8EAD-AA9EABDAA56E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.Application", "Otus.Application\Otus.Application.csproj", "{6195C942-D53E-4B6A-A468-6D172DCED45F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{003EE6A8-3983-4D14-A10A-F807116A8993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{003EE6A8-3983-4D14-A10A-F807116A8993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{003EE6A8-3983-4D14-A10A-F807116A8993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{003EE6A8-3983-4D14-A10A-F807116A8993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18ACE2F-4CE9-4FDE-B433-6C8443E9BABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18ACE2F-4CE9-4FDE-B433-6C8443E9BABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18ACE2F-4CE9-4FDE-B433-6C8443E9BABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18ACE2F-4CE9-4FDE-B433-6C8443E9BABC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44FC8390-316A-4027-AF46-816E7D440F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44FC8390-316A-4027-AF46-816E7D440F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44FC8390-316A-4027-AF46-816E7D440F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44FC8390-316A-4027-AF46-816E7D440F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{646EAF1E-C74C-4180-8EAD-AA9EABDAA56E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{646EAF1E-C74C-4180-8EAD-AA9EABDAA56E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{646EAF1E-C74C-4180-8EAD-AA9EABDAA56E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{646EAF1E-C74C-4180-8EAD-AA9EABDAA56E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6195C942-D53E-4B6A-A468-6D172DCED45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6195C942-D53E-4B6A-A468-6D172DCED45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6195C942-D53E-4B6A-A468-6D172DCED45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6195C942-D53E-4B6A-A468-6D172DCED45F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4FE1B4E-7A58-471F-8809-98EBF735AD7D}
+	EndGlobalSection
+EndGlobal
