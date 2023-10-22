@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("customers")]
+    [ApiController]
+    [Route("api/customers")]
     public class CustomerController : Controller
     {
         private readonly IAddCustomerUseCase addCustomerUseCase;
