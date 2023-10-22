@@ -14,6 +14,7 @@ namespace Application
             services.AddScoped<IGetCustomerByIdUseCase, GetCustomerByIdUseCase>();
             services.AddScoped<IRemoveCustomerUseCase, RemoveCustomerUseCase>();
             services.AddScoped<IUpdateCustomerUseCase, UpdateCustomerUseCase>();
+            services.AddScoped<IGetCustomersUseCase, GetCustomersUseCase>();
             return services;
         }
     }

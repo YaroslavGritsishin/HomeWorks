@@ -18,7 +18,8 @@ namespace WebApi.Controllers
         public CustomerController(IAddCustomerUseCase addCustomerUseCase, 
             IGetCustomerByIdUseCase getCustomerByIdUseCase,
             IRemoveCustomerUseCase removeCustomerUseCase,
-            IUpdateCustomerUseCase updateCustomerUseCase)
+            IUpdateCustomerUseCase updateCustomerUseCase,
+            IGet)
         {
             this.addCustomerUseCase = addCustomerUseCase;
             this.getCustomerByIdUseCase = getCustomerByIdUseCase;
@@ -28,6 +29,16 @@ namespace WebApi.Controllers
 
         [HttpGet("{id}")]   
         public async Task<IActionResult> GetCustomerAsync([FromRoute] int id)
+        {
+            try
+            {
+                return Ok(await getCustomerByIdUseCase.EcxecuteAsync(id));
+            }
+            catch (CustomerNotFoundExeption ex) { return NotFound(ex.Message); }
+            catch (Exception) { return Problem(statusCode: 500, detail: "¬нутренн€€ ошибка сервера!"); }
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetCustomersAsync()
         {
             try
             {

@@ -4,8 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+using System.Text;
 using System.Threading.Tasks;
 using WebClient.Models.RandomUsersApi;
+using Newtonsoft.Json;
 
 namespace WebClient
 {
@@ -34,12 +37,31 @@ namespace WebClient
                 throw new Exception($"Нет ответа от randomuser.me");
             return null;
         }
-        public async Task<string> GetCustomerById(int id)
+        public async Task<string> GetCustomerByIdAsync(int id)
         {
             var response = await httpClient.GetAsync($"https://localhost:5001/api/customers/{id}");
             if (response.StatusCode == HttpStatusCode.OK)
                return (await response.Content.ReadFromJsonAsync<CustomerViewModel>()).ToString();
             if (response.StatusCode == HttpStatusCode.NotFound)
+                return await response.Content.ReadAsStringAsync();
+            return "Ошибка сервера";
+        }
+        public async Task<string> AddCustomerAsync(CustomerViewModel customer)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync($"https://localhost:5001/api/customers", content);
+            if (response.StatusCode == HttpStatusCode.OK)
+                return await response.Content.ReadAsStringAsync();
+            if (response.StatusCode == HttpStatusCode.Conflict)
+                return await response.Content.ReadAsStringAsync();
+            return "Ошибка сервера";
+        }
+        public async Task<string> GetAllCustomerAsync()
+        {
+            var response = await httpClient.GetAsync($"https://localhost:5001/api/customers");
+            if (response.StatusCode == HttpStatusCode.OK)
+                return await response.Content.ReadAsStringAsync();
+            if (response.StatusCode == HttpStatusCode.Conflict)
                 return await response.Content.ReadAsStringAsync();
             return "Ошибка сервера";
         }
