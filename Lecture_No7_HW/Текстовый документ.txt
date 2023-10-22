@@ -1,0 +1,10 @@
+using HttpClient client = ApplicationHost.Services.GetService<IHttpClientFactory>().CreateClient();
+            var response = await client.GetFromJsonAsync<RundomUserResponse>("https://randomuser.me/api");
+            if (response == null)
+                throw new Exception($"Нет ответа от randomuser.me");
+            Result result = response.results.FirstOrDefault();
+            return new CustomerCreateRequest()
+            {
+                Firstname = result?.name.first,
+                Lastname = result?.name.last
+            };
