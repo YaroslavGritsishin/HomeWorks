@@ -1,29 +1,37 @@
-﻿using System.Diagnostics;
+﻿using Lecture_No23_HW;
+using Lecture_No23_HW.Models;
+using System.Diagnostics;
 
 internal class Program
 {
     public static async Task Main(string[] args)
     {
         Stopwatch stopWatch = new();
-        List<Task> tasks = new();
-        
-        stopWatch.Start();
-        
-        foreach (var filePath in Directory.GetFiles("FILES_OTUS_HW"))
-            tasks.Add(Task.Run(() => ReadAndCountSpases(filePath))); 
+        string directoryPath = "FILES_OTUS_HW";
 
-        await Task.WhenAll(tasks);
-        
+        stopWatch.Start();
+
+        await ParallelReadAndCountSpacesInFilesOfDirectory(directoryPath);
+         
         stopWatch.Stop();
 
         await Console.Out.WriteLineAsync(stopWatch.Elapsed.ToString(@"m\:ss\.ffff"));
         Console.ReadLine();
     }
-    public static void ReadAndCountSpases(string filePath)
+    public static void CountSpases(FileData fileData)
     {
-        var count = File.ReadAllText(filePath).Count(symbol => symbol == ' ');
-        Console.WriteLine($"File with name: {Path.GetFileName(filePath)} contains {count} spaces");
+        var count = fileData.Data?.Count(symbol => symbol == ' ');
+        Console.WriteLine($"File with name: {Path.GetFileName(fileData.FilePath)} contains {count} spaces");
     }
-
-
+    public static FileData ReadFile(string filePath) => new FileData()
+    {
+        Data = File.ReadAllText(filePath),
+        FilePath = filePath
+    };
+    public static async Task ParallelReadAndCountSpacesInFilesOfDirectory(string dictionaryPath)
+    {
+        var filesPath = Directory.GetFiles(dictionaryPath);
+        var readFilesData = await filesPath.ExecuteInParallel(ReadFile);
+        await readFilesData.ExecuteInParallel(CountSpases);
+    }
 }
