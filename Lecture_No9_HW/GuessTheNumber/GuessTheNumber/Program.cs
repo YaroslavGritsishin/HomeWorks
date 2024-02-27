@@ -12,7 +12,7 @@ namespace GuessTheNumber
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-
+            builder.Services.AddBootstrapBlazor();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -2,17 +2,12 @@
 
 <PageTitle>GuessTheNumber</PageTitle>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
+<div class="container">
+    <menu>
+        <Menu Items="@Items" DisableNavigation="false"/>
+    </menu>
     <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+        <article>
             @Body
         </article>
     </main>

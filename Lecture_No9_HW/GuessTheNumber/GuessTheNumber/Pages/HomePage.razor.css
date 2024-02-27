@@ -1,0 +1,9 @@
+﻿.title {
+    margin: 2rem 0 2rem 0;
+    text-align:center;
+}
+.numberSection{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
