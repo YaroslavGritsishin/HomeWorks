@@ -1,3 +1,6 @@
+using GuessTheNumber.Data;
+using GuessTheNumber.Data.Repositories;
+using GuessTheNumber.Data.Repositories.Abstraction;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -13,6 +16,10 @@ namespace GuessTheNumber
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddBootstrapBlazor();
+            builder.Services.AddDbContext<ApplicationContext>();
+            builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
