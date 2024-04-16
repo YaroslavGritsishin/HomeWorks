@@ -1,7 +1,18 @@
 ﻿@page "/settings"
+@using GuessTheNumber.Data.State;
 
-<h3>SettingPage</h3>
-
-@code {
-
-}
+<GroupBox Title="Настройки">
+    <EditorForm Model="@SettingViewModel">
+        <FieldItems>
+            <EditorItem @bind-Field="@context.Id" Editable="false" />
+            <EditorItem @bind-Field="@context.SecretNumber" Editable="false" />
+            <EditorItem @bind-Field="@context.EnteredCount" Editable="false" />
+            <EditorItem @bind-Field="@context.AttemptCount" Text="Количество попыток отгадывания" />
+            <EditorItem @bind-Field="@context.StartRange" Text="Начальное значение диапазона отгадуемого числа" />
+            <EditorItem @bind-Field="@context.EndRange" Text="Конечное значение диапазона отгадуемого числа" />
+        </FieldItems>
+        <Buttons>
+            <Button Icon="fa-solid fa-floppy-disk" Text="Сохранить" OnClick="@OnSave"/>
+        </Buttons>
+    </EditorForm>
+</GroupBox>

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuessTheNumber.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240304212220_initial")]
+    [Migration("20240304215043_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace GuessTheNumber.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("AttemptsNumber")
+                    b.Property<int>("AttemptCount")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("EndRange")

@@ -1,14 +1,17 @@
 using GuessTheNumber.Data;
 using GuessTheNumber.Data.Repositories;
 using GuessTheNumber.Data.Repositories.Abstraction;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using GuessTheNumber.Data.State;
+using GuessTheNumber.Data.ViewModels;
+using GuessTheNumber.Services;
+using GuessTheNumber.Services.Abstractions;
 
 namespace GuessTheNumber
 {
     public class Program
     {
-        public static void Main(string[] args)
+        [STAThread]
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +20,12 @@ namespace GuessTheNumber
             builder.Services.AddServerSideBlazor();
             builder.Services.AddBootstrapBlazor();
             builder.Services.AddDbContext<ApplicationContext>();
-            builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 
+            builder.Services.AddRepositories();
+            builder.Services.AddServices();
+            builder.Services.AddViewModels();
+
+            await builder.Services.SeedDataBase();
 
             var app = builder.Build();
 

@@ -7,3 +7,11 @@
     justify-content: center;
     margin-bottom: 2rem;
 }
+.success {
+    font-size: 60pt;
+    color: #198754;
+}
+.danger {
+    font-size: 60pt;
+    color: #dc3545;
+}

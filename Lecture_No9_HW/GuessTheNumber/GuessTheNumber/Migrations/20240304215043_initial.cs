@@ -16,7 +16,7 @@ namespace GuessTheNumber.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    AttemptsNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    AttemptCount = table.Column<int>(type: "INTEGER", nullable: false),
                     StartRange = table.Column<int>(type: "INTEGER", nullable: false),
                     EndRange = table.Column<int>(type: "INTEGER", nullable: false)
                 },

@@ -23,7 +23,7 @@ namespace GuessTheNumber.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("AttemptsNumber")
+                    b.Property<int>("AttemptCount")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("EndRange")
