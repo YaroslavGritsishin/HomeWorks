@@ -12,7 +12,8 @@ F TestClassF = new()
 
 var csv = CsvSerializer.Serializer(TestClassF);
 Console.WriteLine($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {csv}");
-
+var f = CsvSerializer.Deserialize<F>("1,2,3,4,5,6");
+Console.WriteLine(f);
 var js = JsonSerializer.Serialize(TestClassF, new JsonSerializerOptions() { IncludeFields = true});
 Console.WriteLine($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {js}");
 
