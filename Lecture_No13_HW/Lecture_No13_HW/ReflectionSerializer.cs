@@ -1,12 +1,10 @@
 ﻿using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
 
 namespace Lecture_No13_HW
 {
-    public class CsvSerializer
+    public class ReflectionSerializer
     {
-        public static string Serializer(object obj)
+        public static string Serialize(object obj)
         {
             Type serializationObjectType = obj.GetType();
             FieldInfo[] fields = serializationObjectType.GetFields();
@@ -15,7 +13,6 @@ namespace Lecture_No13_HW
         public static TValue? Deserialize<TValue>(object obj)
         {
             var destinationInstance = Activator.CreateInstance(typeof(TValue));
-            Type srcType = obj.GetType();
             if (obj is string inputValue)
             {
                 var fields = destinationInstance?.GetType().GetFields();
@@ -27,6 +24,9 @@ namespace Lecture_No13_HW
                 }
             }
             return (TValue?)destinationInstance;
-        }
+        }      
+        public static string ShowClassFields<T>(T obj) where T : class => $"class {obj.GetType().Name} {{ {string.Join("; ", typeof(F)
+            .GetFields()
+            .Select(field => $"{field.Name} = {field.GetValue(obj)}"))}; }}";
     }
 }

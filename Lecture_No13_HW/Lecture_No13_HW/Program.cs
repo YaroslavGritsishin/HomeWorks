@@ -1,5 +1,11 @@
 ﻿using Lecture_No13_HW;
+using System.Text;
 using System.Text.Json;
+
+StringBuilder sb = new();
+var csvSerializeResult = string.Empty;
+var jsonSerializeResult = string.Empty;
+int iterationNumber = 100000;
 
 F TestClassF = new()
 {
@@ -10,11 +16,19 @@ F TestClassF = new()
     i5 = 5
 };
 
-var csv = CsvSerializer.Serializer(TestClassF);
-Console.WriteLine($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {csv}");
-var f = CsvSerializer.Deserialize<F>("1,2,3,4,5,6");
-Console.WriteLine(f);
-var js = JsonSerializer.Serialize(TestClassF, new JsonSerializerOptions() { IncludeFields = true});
-Console.WriteLine($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {js}");
+
+sb.AppendLine("[Мой рефлекшен]:");
+csvSerializeResult = Performance.Serialize(ref sb, iterationNumber, () => ReflectionSerializer.Serialize(TestClassF));
+var csvDeserializationResult = Performance.Deserialize(ref sb, iterationNumber, () => ReflectionSerializer.Deserialize<F>(csvSerializeResult));
+
+sb.AppendLine("[Cтандартный механизм (System.Text.Json.JsonSerializer)]:");
+jsonSerializeResult = Performance.Serialize(ref sb, iterationNumber, () => JsonSerializer.Serialize(TestClassF, new JsonSerializerOptions() { IncludeFields = true }));
+Performance.Deserialize(ref sb, iterationNumber, () => JsonSerializer.Deserialize<F>(jsonSerializeResult));
+
+sb.Insert(0, $"[Количество замеров]: {iterationNumber} итераций \r\n");
+sb.Insert(0, $"[Код десериализации из CSV]: {csvDeserializationResult}\r\n");
+sb.Insert(0, $"[Код сериализации в CSV]: {csvSerializeResult} \r\n");
+sb.Insert(0, $"[Сериализуемый класс]: {ReflectionSerializer.ShowClassFields(TestClassF)} \r\n");
+Console.WriteLine(sb.ToString());
 
 Console.ReadKey();
