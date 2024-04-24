@@ -5,7 +5,7 @@ namespace Lecture_No30_HW.Models
     /// <summary>
     /// Адресс
     /// </summary>
-    public class Address : IMyCloneable<Address>
+    public class Address : IMyCloneable<Address>, ICloneable
     {
         /// <summary>
         /// Почтовый индекс
@@ -28,6 +28,8 @@ namespace Lecture_No30_HW.Models
             Street = address.Street;
         }
         public Address Copy() => new Address(this);
+
+        public object Clone() => MemberwiseClone();
 
         public override string ToString() => $"{nameof(Street)}: {Street} " +
             $"{nameof(ZipCode)}: {ZipCode};";

@@ -5,7 +5,7 @@ namespace Lecture_No30_HW.Models
     /// <summary>
     /// Контактная информация
     /// </summary>
-    public class Contact : Address, IMyCloneable<Contact>
+    public class Contact : Address, IMyCloneable<Contact>, ICloneable
     {
         /// <summary>
         /// Город
@@ -28,6 +28,8 @@ namespace Lecture_No30_HW.Models
             PhoneNumber = contact.PhoneNumber;
         }
         public new Contact Copy() => new Contact(this);
+
+        public object Clone() => MemberwiseClone();
 
         public override string ToString()
             => $"{nameof(City)}: {City}, " +
