@@ -11,13 +11,13 @@
         /// </summary>
         /// <param name="src">Исходные данные</param>
         /// <returns></returns>
-        public static int SimpleCalculateSum(int[] src) => src.Sum();
+        public static Task<int> SimpleCalculateSum(int[] src) => Task.FromResult(src.Sum());
         /// <summary>
         /// Параллельное вычисление суммы с использовнием Parallel LINQ.
         /// </summary>
         /// <param name="src">Исходные данные</param>
         /// <returns></returns>
-        public static int LinqParallelCalculationSum(int[] src) => src.AsParallel().Sum();
+        public static Task<int> LinqParallelCalculationSum(int[] src) => Task.FromResult(src.AsParallel().Sum());
         /// <summary>
         /// Параллельное вычисление суммы с использовнием предвыделенного пула Task.
         /// </summary>
@@ -43,7 +43,7 @@
             List<IEnumerable<int>> result = new();
             var processorCount = Environment.ProcessorCount;
             var takeRange = (int) Math.Ceiling( Convert.ToDecimal(src.Count()) / Convert.ToDecimal(processorCount));
-            Enumerable.Range(0, Environment.ProcessorCount - 1).ToList().ForEach(index =>
+            Enumerable.Range(0, Environment.ProcessorCount).ToList().ForEach(index =>
             {
                 result.Add(src.Skip(takeRange * index).Take(takeRange));
             });
@@ -58,7 +58,7 @@
         public static int[] CreateFillArray(int size)
         {
             if (size == 0) return Array.Empty<int>();
-            return Enumerable.Range(0, size - 1)
+            return Enumerable.Range(0, size)
                 .Select(x => random.Next(1, 100))
                 .ToArray();
         }
