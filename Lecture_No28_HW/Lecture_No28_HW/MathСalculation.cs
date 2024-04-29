@@ -26,30 +26,15 @@
         public static async Task<int> TasksParallelCalculationSum(int[] src)
         {
             List<Task<int>> tasks = new();
-            foreach (var data in PreparingData(src))
+            var processorCount = Environment.ProcessorCount;
+            var takeRange = (int)Math.Ceiling(Convert.ToDecimal(src.Count()) / Convert.ToDecimal(processorCount));
+            foreach(int index in Enumerable.Range(0, Environment.ProcessorCount))
             {
-                tasks.Add(Task.Run(() => data.Sum()));
+                tasks.Add(Task.Run(() => src.Skip(takeRange * index).Take(takeRange).Sum()));
             }
             await Task.WhenAll(tasks);
             return tasks.Sum(t => t.Result);
         }
-        /// <summary>
-        /// Разбивает данные на части в соответствии количеству ядер используемого процессора
-        /// </summary>
-        /// <param name="src">Исходные данные</param>
-        /// <returns></returns>
-        private static IEnumerable<IEnumerable<int>> PreparingData(int[] src)
-        {
-            List<IEnumerable<int>> result = new();
-            var processorCount = Environment.ProcessorCount;
-            var takeRange = (int) Math.Ceiling( Convert.ToDecimal(src.Count()) / Convert.ToDecimal(processorCount));
-            Enumerable.Range(0, Environment.ProcessorCount).ToList().ForEach(index =>
-            {
-                result.Add(src.Skip(takeRange * index).Take(takeRange));
-            });
-            return result;
-        }
-
         /// <summary>
         /// Создает массив заполненный числовыми значениями в диапазоне от 1 до 1000
         /// </summary>
