@@ -19,19 +19,19 @@ namespace Lecture_No28_HW
         }
 
         /// <summary>
-        /// Выполняет замеры производительности расчета суммы для заданого массива интов, тримя способами (Обычным, параллельным с использованием Task, параллельным с помощью LINQ)
+        /// Выполняет замеры производительности расчёта суммы для заданного массива интов, тремя способами (Обычным, параллельным с использованием Task, параллельным с помощью LINQ)
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="src">Исходные данные</param>
         /// <returns></returns>
-        public static async Task ExecuteAllMethodsOfSumAsync(StringBuilder sb, int[] src)
+        public static async Task ExecuteAllMethodsOfSumAsync(StringBuilder sb, List<int> src)
         {
             sb.AppendLine($"[Размер массива данных {src.Count()}]");
             sb.Append("[Расчёт суммы массива обычным методом]:");
             await ExecuteAsync(sb, () => MathСalculation.SimpleCalculateSum(src));
-            sb.Append("[Расчёт суммы массива c использовнием Parallel LINQ]:");
+            sb.Append("[Расчёт суммы массива c использованием Parallel LINQ]:");
             await ExecuteAsync(sb, () => MathСalculation.LinqParallelCalculationSum(src));
-            sb.Append("[Расчёт суммы массива c использовнием предвыделенного пула Task]:");
+            sb.Append("[Расчёт суммы массива c использованием пред выделенного пула Task]:");
             await ExecuteAsync(sb, () => MathСalculation.TasksParallelCalculationSum(src));
             sb.AppendLine();
         }

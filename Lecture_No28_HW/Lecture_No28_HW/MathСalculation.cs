@@ -11,41 +11,41 @@
         /// </summary>
         /// <param name="src">Исходные данные</param>
         /// <returns></returns>
-        public static Task<int> SimpleCalculateSum(int[] src) => Task.FromResult(src.Sum());
+        public static Task<int> SimpleCalculateSum(List<int> src) => Task.FromResult(src.Sum());
         /// <summary>
-        /// Параллельное вычисление суммы с использовнием Parallel LINQ.
+        /// Параллельное вычисление суммы с использованием Parallel LINQ.
         /// </summary>
         /// <param name="src">Исходные данные</param>
         /// <returns></returns>
-        public static Task<int> LinqParallelCalculationSum(int[] src) => Task.FromResult(src.AsParallel().Sum());
+        public static Task<int> LinqParallelCalculationSum(List<int> src) => Task.FromResult(src.AsParallel().Sum());
         /// <summary>
-        /// Параллельное вычисление суммы с использовнием предвыделенного пула Task.
+        /// Параллельное вычисление суммы с использованием пред выделенного пула Task.
         /// </summary>
         /// <param name="src">Исходные данные</param>
         /// <returns></returns>
-        public static async Task<int> TasksParallelCalculationSum(int[] src)
+        public static async Task<int> TasksParallelCalculationSum(List<int> src)
         {
             List<Task<int>> tasks = new();
             var processorCount = Environment.ProcessorCount;
             var takeRange = (int)Math.Ceiling(Convert.ToDecimal(src.Count()) / Convert.ToDecimal(processorCount));
             for(int i = 0; i < processorCount - 1; i++)
             {
-                tasks.Add(Task.Run(() => src.Skip(takeRange * index).Take(takeRange).Sum()));
+                tasks.Add(Task.Run(() => src.Skip(takeRange * i).Take(takeRange).Sum()));
             }
             await Task.WhenAll(tasks);
             return tasks.Sum(t => t.Result);
         }
         /// <summary>
-        /// Создает массив заполненный числовыми значениями в диапазоне от 1 до 1000
+        /// Создаёт массив заполненный числовыми значениями в диапазоне от 1 до 1000
         /// </summary>
         /// <param name="size">Размер массива</param>
         /// <returns></returns>
-        public static int[] CreateFillArray(int size)
+        public static List<int> CreateFillArray(int size)
         {
-            if (size == 0) return Array.Empty<int>();
+            if (size == 0) return new();
             return Enumerable.Range(0, size)
                 .Select(x => random.Next(1, 100))
-                .ToArray();
+                .ToList();
         }
     }
 }
