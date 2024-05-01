@@ -1,4 +1,6 @@
-﻿namespace Lecture_No28_HW
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace Lecture_No28_HW
 {
     /// <summary>
     /// Математические расчёты
@@ -28,9 +30,10 @@
             List<Task<int>> tasks = new();
             var processorCount = Environment.ProcessorCount;
             var takeRange = (int)Math.Ceiling(Convert.ToDecimal(src.Count()) / Convert.ToDecimal(processorCount));
-            for(int i = 0; i < processorCount - 1; i++)
+            for(int i = 0; i < processorCount; i++)
             {
-                tasks.Add(Task.Run(() => src.Skip(takeRange * i).Take(takeRange).Sum()));
+                int index = i;
+                tasks.Add(Task.Run(() => src.GetRange(takeRange * index, takeRange).Sum()));
             }
             await Task.WhenAll(tasks);
             return tasks.Sum(t => t.Result);
