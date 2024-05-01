@@ -28,7 +28,7 @@
             List<Task<int>> tasks = new();
             var processorCount = Environment.ProcessorCount;
             var takeRange = (int)Math.Ceiling(Convert.ToDecimal(src.Count()) / Convert.ToDecimal(processorCount));
-            foreach(int index in Enumerable.Range(0, Environment.ProcessorCount))
+            for(int i = 0; i < processorCount - 1; i++)
             {
                 tasks.Add(Task.Run(() => src.Skip(takeRange * index).Take(takeRange).Sum()));
             }
